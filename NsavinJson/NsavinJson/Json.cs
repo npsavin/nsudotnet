@@ -50,12 +50,17 @@ namespace NsavinJson
                 {
                     stringBuilder.Append(", ");
                 }
+                if (StringBuilderIsEmpty(stringBuilder))
+                {
+                    stringBuilder.Append("{");
+                }
                 stringBuilder.AppendFormat("\u0022{0}\u0022 : {1}", fieldInfo.Name,
                     Serialize(fieldInfo.GetValue(resive)));
             }
 
-
-            return "{" + stringBuilder + "}";
+            stringBuilder.Append("}");
+            
+            return  stringBuilder.ToString();
         }
 
         private static string SerializeArray(IEnumerable arrayEnumerable)
@@ -67,9 +72,14 @@ namespace NsavinJson
                 {
                     stringBuilder.Append(", ");
                 }
+                if (StringBuilderIsEmpty(stringBuilder))
+                {
+                    stringBuilder.Append("[");
+                }
                 stringBuilder.Append(Serialize(obj));
             }
-            return "[" + stringBuilder + "]";
+            stringBuilder.Append("]");
+            return stringBuilder.ToString();
         }
 
         private static bool StringBuilderIsEmpty(StringBuilder stringBuilder)
