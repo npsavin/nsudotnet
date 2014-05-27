@@ -19,13 +19,9 @@ namespace NsavinJson
 
             if (!typeResive.IsSerializable)
             {
-                throw new Exception(string.Format("not correct type"));
+                throw new SerializationException();
             }
 
-            if (resive.Equals(null))
-            {
-                return "\0";
-            }
 
             if (typeResive.IsPrimitive)
             {
