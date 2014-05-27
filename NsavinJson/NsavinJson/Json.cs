@@ -45,8 +45,7 @@ namespace NsavinJson
             for (var index = 0; index < fieldInfos.Length; index++)
             {
                 var fieldInfo = fieldInfos[index];
-                Console.WriteLine(fieldInfo);
-                if (fieldInfo.GetCustomAttributes(typeof(NonSerializedAttribute)) != null)
+                if (fieldInfo.GetCustomAttribute<NonSerializedAttribute>() != null)
                 {
                     continue;
                 }
