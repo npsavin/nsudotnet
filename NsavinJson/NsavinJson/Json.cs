@@ -8,6 +8,7 @@ namespace NsavinJson
 {
     public class Json
     {
+        
         public static string GetObject(object obj)
         {
             return Serialize(obj);
@@ -29,7 +30,7 @@ namespace NsavinJson
             }
             if (typeof(string) == typeResive)
             {
-                return "\u0022" + resive + "\u0022";
+                return "\"" + resive + "\"";
             }
             if (typeResive.IsArray)
             {
@@ -54,7 +55,7 @@ namespace NsavinJson
                 {
                     stringBuilder.Append("{");
                 }
-                stringBuilder.AppendFormat("\u0022{0}\u0022 : {1}", fieldInfo.Name,
+                stringBuilder.AppendFormat("\"{0}\" : {1}", fieldInfo.Name,
                     Serialize(fieldInfo.GetValue(resive)));
             }
 
