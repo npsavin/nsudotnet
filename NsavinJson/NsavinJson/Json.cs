@@ -19,7 +19,7 @@ namespace NsavinJson
 
             if (!typeResive.IsSerializable)
             {
-                throw new SerializationException();
+                throw new SerializationException("Incorrect type");
             }
 
 
