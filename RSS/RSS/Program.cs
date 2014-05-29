@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using System.ServiceModel.Syndication;
 using System.Threading;
+using System.Timers;
 using System.Xml;
 
 
@@ -14,13 +15,14 @@ namespace NsavinRSS
 
         private static void Main(string[] args)
         {
-            var autoEvent = new AutoResetEvent(false);
-            TimerCallback tcb = LoadFeeds;
-            var timer = new Timer(tcb, autoEvent, 0, 5000);
-            autoEvent.WaitOne(5000, false);
-            timer.Change(0, 5000);
-
-
+            //var autoEvent = new AutoResetEvent(false);
+            //TimerCallback tcb = LoadFeeds;
+            //var timer = new Timer(tcb, autoEvent, 0, 5000);
+            //autoEvent.WaitOne(5000, false);
+            aTimer = new System.Timers.Timer(500);
+            aTimer.Elapsed += new ElapsedEventHandler(LoadFeeds);
+            aTimer.Enabled = true;
+            Console.ReadLine();
         }
 
 
@@ -38,7 +40,7 @@ namespace NsavinRSS
             smtp.Send(message);
         }
 
-        private static void LoadFeeds(Object o)
+        private static void LoadFeeds(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             const string tbUrl = "http://bash.im/rss";
             var feedReader = XmlReader.Create(tbUrl);
