@@ -18,7 +18,7 @@ namespace NsavinRSS
             TimerCallback tcb = LoadFeeds;
             var timer = new Timer(tcb, autoEvent, 0, 5000);
             autoEvent.WaitOne(5000, false);
-            timer.Change(0, 500);
+            timer.Change(0, 5000);
 
 
         }
@@ -26,7 +26,7 @@ namespace NsavinRSS
 
         private static void Send(SyndicationItem item)
         {
-            var smtp = new SmtpClient("smtp.rambler.ru", 587) {Credentials = new NetworkCredential("npsavin", "savin0810")};
+            var smtp = new SmtpClient("smtp.rambler.ru", 587) {Credentials = new NetworkCredential("npsavin", "")};
 
             var message = new MailMessage {From = new MailAddress("npsavin@rambler.ru")};
             message.To.Add(new MailAddress("fsafsa@lackhite.com"));
