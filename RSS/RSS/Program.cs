@@ -17,18 +17,16 @@ namespace NsavinRSS
             var autoEvent = new AutoResetEvent(false);
             TimerCallback tcb = LoadFeeds;
             var timer = new Timer(tcb, autoEvent, 0, 5000);
-            while (true)
-            {
-                autoEvent.WaitOne(5000, false);
-            }
-            
-            
+            autoEvent.WaitOne(5000, false);
+            timer.Change(0, 500);
+
+
         }
 
 
         private static void Send(SyndicationItem item)
         {
-            var smtp = new SmtpClient("smtp.rambler.ru", 587) {Credentials = new NetworkCredential("npsavin", "")};
+            var smtp = new SmtpClient("smtp.rambler.ru", 587) {Credentials = new NetworkCredential("npsavin", "savin0810")};
 
             var message = new MailMessage {From = new MailAddress("npsavin@rambler.ru")};
             message.To.Add(new MailAddress("fsafsa@lackhite.com"));
